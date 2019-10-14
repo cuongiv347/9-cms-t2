@@ -1,121 +1,70 @@
-<?php
-/**
- * Network installation administration panel.
- *
- * A multi-step process allowing the user to enable a network of WordPress sites.
- *
- * @since 3.0.0
- *
- * @package WordPress
- * @subpackage Administration
- */
-
-define( 'WP_INSTALLING_NETWORK', true );
-
-/** WordPress Administration Bootstrap */
-require_once( dirname( __FILE__ ) . '/admin.php' );
-
-if ( ! current_user_can( 'setup_network' ) ) {
-	wp_die( __( 'Sorry, you are not allowed to manage options for this site.' ) );
-}
-
-if ( is_multisite() ) {
-	if ( ! is_network_admin() ) {
-		wp_redirect( network_admin_url( 'setup.php' ) );
-		exit;
-	}
-
-	if ( ! defined( 'MULTISITE' ) ) {
-		wp_die( __( 'The Network creation panel is not for WordPress MU networks.' ) );
-	}
-}
-
-require_once( dirname( __FILE__ ) . '/includes/network.php' );
-
-// We need to create references to ms global tables to enable Network.
-foreach ( $wpdb->tables( 'ms_global' ) as $table => $prefixed_table ) {
-	$wpdb->$table = $prefixed_table;
-}
-
-if ( ! network_domain_check() && ( ! defined( 'WP_ALLOW_MULTISITE' ) || ! WP_ALLOW_MULTISITE ) ) {
-	wp_die(
-		printf(
-			/* translators: 1: WP_ALLOW_MULTISITE 2: wp-config.php */
-			__( 'You must define the %1$s constant as true in your %2$s file to allow creation of a Network.' ),
-			'<code>WP_ALLOW_MULTISITE</code>',
-			'<code>wp-config.php</code>'
-		)
-	);
-}
-
-if ( is_network_admin() ) {
-	$title       = __( 'Network Setup' );
-	$parent_file = 'settings.php';
-} else {
-	$title       = __( 'Create a Network of WordPress Sites' );
-	$parent_file = 'tools.php';
-}
-
-$network_help = '<p>' . __( 'This screen allows you to configure a network as having subdomains (<code>site1.example.com</code>) or subdirectories (<code>example.com/site1</code>). Subdomains require wildcard subdomains to be enabled in Apache and DNS records, if your host allows it.' ) . '</p>' .
-	'<p>' . __( 'Choose subdomains or subdirectories; this can only be switched afterwards by reconfiguring your installation. Fill out the network details, and click Install. If this does not work, you may have to add a wildcard DNS record (for subdomains) or change to another setting in Permalinks (for subdirectories).' ) . '</p>' .
-	'<p>' . __( 'The next screen for Network Setup will give you individually-generated lines of code to add to your wp-config.php and .htaccess files. Make sure the settings of your FTP client make files starting with a dot visible, so that you can find .htaccess; you may have to create this file if it really is not there. Make backup copies of those two files.' ) . '</p>' .
-	'<p>' . __( 'Add the designated lines of code to wp-config.php (just before <code>/*...stop editing...*/</code>) and <code>.htaccess</code> (replacing the existing WordPress rules).' ) . '</p>' .
-	'<p>' . __( 'Once you add this code and refresh your browser, multisite should be enabled. This screen, now in the Network Admin navigation menu, will keep an archive of the added code. You can toggle between Network Admin and Site Admin by clicking on the Network Admin or an individual site name under the My Sites dropdown in the Toolbar.' ) . '</p>' .
-	'<p>' . __( 'The choice of subdirectory sites is disabled if this setup is more than a month old because of permalink problems with &#8220;/blog/&#8221; from the main site. This disabling will be addressed in a future version.' ) . '</p>' .
-	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://codex.wordpress.org/Create_A_Network">Documentation on Creating a Network</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://codex.wordpress.org/Tools_Network_Screen">Documentation on the Network Screen</a>' ) . '</p>';
-
-get_current_screen()->add_help_tab(
-	array(
-		'id'      => 'network',
-		'title'   => __( 'Network' ),
-		'content' => $network_help,
-	)
-);
-
-get_current_screen()->set_help_sidebar(
-	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://codex.wordpress.org/Create_A_Network">Documentation on Creating a Network</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://codex.wordpress.org/Tools_Network_Screen">Documentation on the Network Screen</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/support/">Support</a>' ) . '</p>'
-);
-
-include( ABSPATH . 'wp-admin/admin-header.php' );
-?>
-<div class="wrap">
-<h1><?php echo esc_html( $title ); ?></h1>
-
-<?php
-if ( $_POST ) {
-
-	check_admin_referer( 'install-network-1' );
-
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	// Create network tables.
-	install_network();
-	$base              = parse_url( trailingslashit( get_option( 'home' ) ), PHP_URL_PATH );
-	$subdomain_install = allow_subdomain_install() ? ! empty( $_POST['subdomain_install'] ) : false;
-	if ( ! network_domain_check() ) {
-		$result = populate_network( 1, get_clean_basedomain(), sanitize_email( $_POST['email'] ), wp_unslash( $_POST['sitename'] ), $base, $subdomain_install );
-		if ( is_wp_error( $result ) ) {
-			if ( 1 == count( $result->get_error_codes() ) && 'no_wildcard_dns' == $result->get_error_code() ) {
-				network_step2( $result );
-			} else {
-				network_step1( $result );
-			}
-		} else {
-			network_step2();
-		}
-	} else {
-		network_step2();
-	}
-} elseif ( is_multisite() || network_domain_check() ) {
-	network_step2();
-} else {
-	network_step1();
-}
-?>
-</div>
-
-<?php include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+"REG_SZ" value="{6B1DE8B3-DFB1-4C0E-9D9A-89CA730DE93F}" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{6B7F33AC-D91D-4563-BF36-0ACCB24E66FB}\LocalServer32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="$(runtime.system32)\mstsc.exe -SingleUse" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{1B462D7B-72D8-4544-ACC1-D84E5B9A8A14}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{9C757116-4367-4DA9-AC0E-6C6577AD5560}" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{A0B2DD9A-7F53-4E65-8547-851952EC8C96}" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="IMsRdpSessionManager" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{A0B2DD9A-7F53-4E65-8547-851952EC8C96}\ProxyStubClsid32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{A0B2DD9A-7F53-4E65-8547-851952EC8C96}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{9C757116-4367-4DA9-AC0E-6C6577AD5560}" owner="true" />
+      <registryValue name="Version" valueType="REG_SZ" value="1.0" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\TypeLib\{9C757116-4367-4DA9-AC0E-6C6577AD5560}" owner="false">
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\TypeLib\{9C757116-4367-4DA9-AC0E-6C6577AD5560}\1.0" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="MsRdpSessionManager 1.0 Type Library" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\TypeLib\{9C757116-4367-4DA9-AC0E-6C6577AD5560}\1.0\0" owner="false" />
+    <registryKey keyName="HKEY_CLASSES_ROOT\TypeLib\{9C757116-4367-4DA9-AC0E-6C6577AD5560}\1.0\0\win32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="$(runtime.system32)\mstsc.exe" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\TypeLib\{9C757116-4367-4DA9-AC0E-6C6577AD5560}\1.0\FLAGS" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="0" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\TypeLib\{9C757116-4367-4DA9-AC0E-6C6577AD5560}\1.0\HELPDIR" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="$(runtime.system32)" owner="true" />
+    </registryKey>
+  </registryKeys>
+  <trustInfo>
+    <security>
+      <accessControl>
+        <securityDescriptorDefinitions>
+          <securityDescriptorDefinition name="REGKEY_NETWORKSERVICE_ONLY" sddl="O:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464G:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464D:P(A;CI;GA;;;S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464)(A;CI;GA;;;SY)(A;CI;GA;;;BA)(A;CI;GR;;;NS)" operationHint="replace" />
+          <securityDescriptorDefinition name="WRP_FILE_DEFAULT_SDDL" sddl="O:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464G:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464D:P(A;;FA;;;S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464)(A;;GRGX;;;BA)(A;;GRGX;;;SY)(A;;GRGX;;;BU)S:(AU;FASA;0x000D0116;;;WD)" operationHint="replace" description="Default SDDL for Windows Resource Protected file" />
+          <securityDescriptorDefinition name="WRP_REGKEY_ALL_AUTH_USERS" sddl="D:(D;;KAKRKWKX;;;BG)(D;;KAKRKWKX;;;AN)(A;;KRKWKX;;;AU)(A;;KAKRKWKX;;;BA)" operationHint="replace" />
+          <securityDescriptorDefinition name="WRP_REGKEY_DEFAULT_SDDL" sddl="O:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464G:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464D:P(A;CI;GA;;;S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464)(A;CI;GR;;;SY)(A;CI;GR;;;BA)(A;CI;GR;;;BU)" operationHint="replace" />
+        </securityDescriptorDefinitions>
+      </accessControl>
+    </security>
+  </trustInfo>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="description" value="This component implements the Terminal Services Client." />
+        <string id="description1" value="Default SDDL for Windows Resource Protected file" />
+        <string id="description7" value="Default SDDL for Windows Resource Protected registry key" />
+        <string id="description8" value="SDDL to allow all authorized users to read/write values to this registry key" />
+        <string id="description9" value="Only Administrators and Network Service have access to registry key" />
+        <string id="displayName" value="Terminal Services Client" />
+        <string id="displayName0" value="WRP_FILE_DEFAULT_SDDL" />
+        <string id="displayName6" value="WRP_REGKEY_DEFAULT_SDDL" />
+        <string id="displayName7" value="WRP_REGKEY_ALL_AUTH_USERS" />
+        <string id="displayName8" value="REGKEY_NETWORKSERVICE_ONLY" />
+      </stringTable>
+    </resources>
+  </localization>
+  <migration settingsVersion="0">
+    <supportedComponents>
+      <supportedComponent>
+        <assemblyIdentity name="_" version="1.0.0.0" />
+   

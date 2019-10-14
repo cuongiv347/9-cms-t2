@@ -1,141 +1,55 @@
-<?php
-/**
- * Twenty Sixteen functions and definitions
- *
- * Set up the theme and provides some helper functions, which are used in the
- * theme as custom template tags. Others are attached to action and filter
- * hooks in WordPress to change core functionality.
- *
- * When using a child theme you can override certain functions (those wrapped
- * in a function_exists() call) by defining them first in your child theme's
- * functions.php file. The child theme's functions.php file is included before
- * the parent theme's file, so the child theme functions would be used.
- *
- * @link https://codex.wordpress.org/Theme_Development
- * @link https://developer.wordpress.org/themes/advanced-topics/child-themes/
- *
- * Functions that are not pluggable (not wrapped in function_exists()) are
- * instead attached to a filter or action hook.
- *
- * For more information on hooks, actions, and filters,
- * {@link https://codex.wordpress.org/Plugin_API}
- *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
- */
-
-/**
- * Twenty Sixteen only works in WordPress 4.4 or later.
- */
-if ( version_compare( $GLOBALS['wp_version'], '4.4-alpha', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
-}
-
-if ( ! function_exists( 'twentysixteen_setup' ) ) :
-	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
-	 * Note that this function is hooked into the after_setup_theme hook, which
-	 * runs before the init hook. The init hook is too late for some features, such
-	 * as indicating support for post thumbnails.
-	 *
-	 * Create your own twentysixteen_setup() function to override in a child theme.
-	 *
-	 * @since Twenty Sixteen 1.0
-	 */
-	function twentysixteen_setup() {
-		/*
-		 * Make theme available for translation.
-		 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/twentysixteen
-		 * If you're building a theme based on Twenty Sixteen, use a find and replace
-		 * to change 'twentysixteen' to the name of your theme in all the template files
-		 */
-		load_theme_textdomain( 'twentysixteen' );
-
-		// Add default posts and comments RSS feed links to head.
-		add_theme_support( 'automatic-feed-links' );
-
-		/*
-		 * Let WordPress manage the document title.
-		 * By adding theme support, we declare that this theme does not use a
-		 * hard-coded <title> tag in the document head, and expect WordPress to
-		 * provide it for us.
-		 */
-		add_theme_support( 'title-tag' );
-
-		/*
-		 * Enable support for custom logo.
-		 *
-		 *  @since Twenty Sixteen 1.2
-		 */
-		add_theme_support(
-			'custom-logo',
-			array(
-				'height'      => 240,
-				'width'       => 240,
-				'flex-height' => true,
-			)
-		);
-
-		/*
-		 * Enable support for Post Thumbnails on posts and pages.
-		 *
-		 * @link https://developer.wordpress.org/reference/functions/add_theme_support/#post-thumbnails
-		 */
-		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 1200, 9999 );
-
-		// This theme uses wp_nav_menu() in two locations.
-		register_nav_menus(
-			array(
-				'primary' => __( 'Primary Menu', 'twentysixteen' ),
-				'social'  => __( 'Social Links Menu', 'twentysixteen' ),
-			)
-		);
-
-		/*
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
-		 */
-		add_theme_support(
-			'html5',
-			array(
-				'search-form',
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'caption',
-			)
-		);
-
-		/*
-		 * Enable support for Post Formats.
-		 *
-		 * See: https://codex.wordpress.org/Post_Formats
-		 */
-		add_theme_support(
-			'post-formats',
-			array(
-				'aside',
-				'image',
-				'video',
-				'quote',
-				'link',
-				'gallery',
-				'status',
-				'audio',
-				'chat',
-			)
-		);
-
-		/*
-		 * This theme styles the visual editor to resemble the theme style,
-		 * specifically font, colors, icons, and column width.
-		 */
-		add_editor_style( array( 'css/editor-style.css', twentysixteen_fonts_url() ) );
-
-		// Load regular editor styles into the new block-based editor.
+:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">vmtOoAhZgSHoKijZawFn2/mBFFwNdfqP4W5nqhaLXSA=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="WMIMigrationPlugin.dll" destinationPath="$(runtime.system32)\migration\" sourceName="WMIMigrationPlugin.dll" sourcePath=".\" importPath="$(build.nttree)\rsip\Setup\Sources\dlmanifests\Microsoft-Windows-WMI-Core\">
+    <securityDescriptor name="WRP_FILE_DEFAULT_SDDL" />
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">+J485yMjbE6K9Tdw/yUuliU0vqh9pl94TEBJg0NfpZI=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="ncobjapi.dll" destinationPath="$(runtime.system32)\" sourceName="ncobjapi.dll" sourcePath=".\" importPath="$(build.nttree)\rsip\win7\">
+    <securityDescriptor name="WRP_FILE_DEFAULT_SDDL" />
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">pLkNAIj0rhmGOCNrAgRy30J+tpCGTdB3KXO4Do1uaRA=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <registryKeys>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{6c19be35-7500-11d1-ad94-00c04fd8fdff}\" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="Microsoft WBEM Event filter marshaling proxy" owner="true" />
+      <securityDescriptor name="WRP_KEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{6c19be35-7500-11d1-ad94-00c04fd8fdff}\Implemented Categories\{00000003-0000-0000-C000-000000000046}\" owner="false" />
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{6c19be35-7500-11d1-ad94-00c04fd8fdff}\InprocServer32\" owner="false">
+      <registryValue name="" valueType="REG_EXPAND_SZ" value="%systemroot%\system32\wbem\esscli.dll" owner="true" />
+      <registryValue name="ThreadingModel" valueType="REG_SZ" value="Both" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{6c19be35-7500-11d1-ad94-00c04fd8fdff}\Implemented Categories\" owner="false" />
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{288a2d5f-253c-46b4-b58c-2ced3180b993}\" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="CMI IInstaller" owner="true" />
+      <securityDescriptor name="WRP_KEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{288a2d5f-253c-46b4-b58c-2ced3180b993}\InprocServer32" owner="false">
+      <registryValue name="" valueType="REG_EXPAND_SZ" value="%systemroot%\system32\wbem\mofd.dll" owner="true" />
+      <registryValue name="ThreadingModel" valueType="REG_SZ" value="Both" owner="true" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{DC923725-0FDD-45E1-AE74-EA09182E739B}\" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="Microsoft WBEM Wbem Token Cache" owner="true" />
+      <securityDescriptor name="WRP_KEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\CLSID\{DC923725-0FDD-45E1-AE74-EA09182E739B}\InprocServer32\" owner="far editor styles into the new block-based editor.
 		add_theme_support( 'editor-styles' );
 
 		// Load default block styles.
